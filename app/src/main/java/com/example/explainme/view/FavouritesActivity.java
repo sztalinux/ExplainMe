@@ -1,0 +1,22 @@
+package com.example.explainme.view;
+
+import android.content.Intent;
+import android.os.Bundle;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.explainme.R;
+
+import org.androidannotations.annotations.Click;
+import org.androidannotations.annotations.EActivity;
+
+@EActivity(R.layout.activity_favourites)
+public class FavouritesActivity extends AppCompatActivity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+    }
+
+}
