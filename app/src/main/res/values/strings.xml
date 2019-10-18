@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">ExplainMe</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="serverconnectionerrordialog_message">Wystąpił problem z serwerem.</string>
+    <string name="serverconnectionerrordialog_tryagain">Spróbuj ponownie.</string>
+    <string name="serverconnectionerrordialog_cancel">OK</string>
 </resources>

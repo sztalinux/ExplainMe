@@ -10,30 +10,34 @@ import com.example.explainme.R;
 import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EActivity;
 
-@EActivity(R.layout.activity_main)
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+
+
 public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        setContentView(R.layout.activity_main);
+        ButterKnife.bind(this);
     }
 
-    @Click(R.id.button_explain)
+    @OnClick(R.id.button_explain)
     public void goToExplainActivity() {
-        Intent intent = new Intent(this, ExplainActivity_.class);
+        Intent intent = new Intent(this, ExplainActivity.class);
         this.startActivity(intent);
     }
 
-    @Click(R.id.button_favourites)
+    @OnClick(R.id.button_favourites)
     public void goToFavouritesActivity() {
-        Intent intent = new Intent(this, FavouritesActivity_.class);
+        Intent intent = new Intent(this, FavouritesActivity.class);
         this.startActivity(intent);
     }
 
-    @Click(R.id.button_history)
+    @OnClick(R.id.button_history)
     public void goToHistoryActivity() {
-        Intent intent = new Intent(this, HistoryActivity_.class);
+        Intent intent = new Intent(this, HistoryActivity.class);
         this.startActivity(intent);
     }
 }

@@ -12,10 +12,12 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         javaCompileOptions {
             annotationProcessorOptions {
-//                arguments = ["resourcePackageName": android.defaultConfig.applicationId]
-                arguments = [
-                        'androidManifestFile': 'app\\build\\intermediates\\merged_manifests\\debug\\AndroidManifest.xml'
-                ]
+                arguments = ["resourcePackageName": android.defaultConfig.applicationId,
+                             'androidManifestFile': 'app\\build\\intermediates\\merged_manifests\\devDebug\\AndroidManifest.xml',
+                             "room.schemaLocation":"$projectDir/schemas".toString(),
+                             "room.incremental":"true",
+                             "room.expandProjection":"true"]
+
             }
         }
     }
@@ -53,10 +55,18 @@ dependencies {
     implementation 'com.squareup.retrofit2:retrofit:2.5.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.5.0'
     implementation 'org.androidannotations:androidannotations-api:4.6.0'
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation 'androidx.recyclerview:recyclerview:1.0.0'
     compileOnly 'org.projectlombok:lombok:1.18.8'
     annotationProcessor 'org.projectlombok:lombok:1.18.8'
     annotationProcessor "org.androidannotations:androidannotations:4.6.0"
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
+    implementation 'com.jakewharton:butterknife:10.1.0'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:10.1.0'
+    implementation 'com.google.android.material:material:1.0.0'
+    implementation "androidx.room:room-runtime:2.2.0"
+    annotationProcessor "androidx.room:room-compiler:2.2.0"
+
 }

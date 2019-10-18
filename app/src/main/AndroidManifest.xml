@@ -13,7 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".view.MainActivity_">
+        <activity android:name=".view.MainActivity">
             <intent-filter>
 
                 <action android:name="android.intent.action.MAIN" />
@@ -22,9 +22,9 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:name=".view.ExplainActivity_" />
-        <activity android:name=".view.HistoryActivity_" />
-        <activity android:name=".view.FavouritesActivity_" />
+        <activity android:name=".view.ExplainActivity" />
+        <activity android:name=".view.HistoryActivity" />
+        <activity android:name=".view.FavouritesActivity" />
 
         <service android:name=".services.NetworkService" />
     </application>

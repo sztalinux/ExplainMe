@@ -4,18 +4,18 @@ public class Const {
 
     public static final String API_KEY = "3fc2283c4emsh83751c04b567a82p1246bfjsnc69dc8712c4d";
     // preferences
-    public static final String PREFERENCES_FILE_NAME = "kw06_prefs";
+    public static final String PREFERENCES_FILE_NAME_API_RESPONSES = "apiResonses";
+    public static final String PREFERENCES_FILE_NAME_SEARCH_HISTORY = "searchHistory";
+    public static final String PREFERENCES_KEY_SYNONYMS = "searchHistory";
 
-    // intents
-    // names
 
-    // keys
+    public static final String DEFINITION_INTENT = "definitionIntent";
+    public static final String SYNONYM_INTENT = "synonymIntent";
 
-    // specific data
 
-    // persistent notification
 
-    // config (values in seconds)
+    public static final String DATABASE_NAME = "synonymIntent";
+
 
 
 }
