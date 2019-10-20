@@ -16,23 +16,23 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class HistoryRecyclerViewAdapter extends RecyclerView.Adapter<HistoryRecyclerViewAdapter.WifiViewHolder> {
+public class WordsListRecyclerViewAdapter extends RecyclerView.Adapter<WordsListRecyclerViewAdapter.WordViewHolder> {
 
     private List<String> words;
     private RecyclerViewClickListener onClickListener;
 
-    public HistoryRecyclerViewAdapter(List<String> words, RecyclerViewClickListener onClickListener) {
+    public WordsListRecyclerViewAdapter(List<String> words, RecyclerViewClickListener onClickListener) {
         this.words = words;
         this.onClickListener = onClickListener;
     }
 
-    class WifiViewHolder extends RecyclerView.ViewHolder {
-        @BindView(R.id.textview_history_word)
+    class WordViewHolder extends RecyclerView.ViewHolder {
+        @BindView(R.id.textview_word)
         public TextView wordTextView;
-        @BindView(R.id.imagebutton_history_worddelete)
+        @BindView(R.id.imagebutton_worddelete)
         public ImageButton wordDeleteButton;
 
-        WifiViewHolder(View itemView) {
+        WordViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
 
@@ -43,14 +43,14 @@ public class HistoryRecyclerViewAdapter extends RecyclerView.Adapter<HistoryRecy
 
     @NonNull
     @Override
-    public WifiViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public WordViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.item_history_word, parent, false);
-        return new WifiViewHolder(view);
+                .inflate(R.layout.item_wordinlist, parent, false);
+        return new WordViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull WifiViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull WordViewHolder holder, int position) {
         holder.wordTextView.setText(words.get(position));
     }
 

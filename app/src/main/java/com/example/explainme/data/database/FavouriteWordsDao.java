@@ -10,8 +10,11 @@ import java.util.List;
 @Dao
 public interface FavouriteWordsDao {
     @Query("SELECT * FROM favouriteWords")
-    List<FavouriteWords> getAll();
+    List<FavouriteWordsEntity> getAll();
 
-    @Insert(entity = FavouriteWords.class)
+    @Insert(entity = FavouriteWordsEntity.class)
     void insertWord(String word);
+
+//    @Delete
+//    void deleteWord(FavouriteWordsEntity word);
 }

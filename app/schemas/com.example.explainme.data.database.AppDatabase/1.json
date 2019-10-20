@@ -2,11 +2,11 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "a5da26d1bf611aeba0ac45a09a54264f",
+    "identityHash": "eee0da64d9bae02ccaa527cfa7cd001e",
     "entities": [
       {
         "tableName": "favouriteWords",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `word` TEXT)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `favouriteWord` TEXT)",
         "fields": [
           {
             "fieldPath": "id",
@@ -15,8 +15,8 @@
             "notNull": true
           },
           {
-            "fieldPath": "word",
-            "columnName": "word",
+            "fieldPath": "favouriteWord",
+            "columnName": "favouriteWord",
             "affinity": "TEXT",
             "notNull": false
           }
@@ -34,7 +34,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'a5da26d1bf611aeba0ac45a09a54264f')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'eee0da64d9bae02ccaa527cfa7cd001e')"
     ]
   }
 }

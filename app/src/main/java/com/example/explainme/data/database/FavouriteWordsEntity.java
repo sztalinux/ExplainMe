@@ -8,10 +8,10 @@ import lombok.Getter;
 
 @Getter
 @Entity(tableName = "favouriteWords")
-public class FavouriteWords {
+public class FavouriteWordsEntity {
     @PrimaryKey(autoGenerate = true)
     public int id;
 
-    @ColumnInfo(name = "word")
-    public String word;
+    @ColumnInfo(name = "favouriteWord")
+    public String favouriteWord;
 }

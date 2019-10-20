@@ -9,8 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.explainme.R;
-import com.example.explainme.adapter.DefinitionRecyclerViewAdapter;
-import com.example.explainme.adapter.HistoryRecyclerViewAdapter;
+import com.example.explainme.adapter.WordsListRecyclerViewAdapter;
 import com.example.explainme.data.prefs.PreferencesManager;
 import com.example.explainme.data.prefs.PreferencesManagerImpl;
 
@@ -46,7 +45,7 @@ public class HistoryActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         initializeHistory();
-        adapter = new HistoryRecyclerViewAdapter(historyWords, this::deleteHistoryWord);
+        adapter = new WordsListRecyclerViewAdapter(historyWords, this::deleteHistoryWord);
         recyclerView.setAdapter(adapter);
     }
 
@@ -56,6 +55,7 @@ public class HistoryActivity extends AppCompatActivity {
 
     public void deleteHistoryWord(String word){
         preferencesManager.removeWordFromHistory(word);
+        updateView();
     }
 
     private void updateView() {
