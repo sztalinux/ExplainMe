@@ -11,5 +11,5 @@ import lombok.Setter;
 @Setter
 public class DefinitionDto {
     private String word;
-    private List<Definition> definitions;
+    private final List<Definition> definitions;
 }

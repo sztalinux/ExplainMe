@@ -1,9 +1,14 @@
 <resources>
-    <string name="app_name">ExplainMe</string>
+    <string name="app_name" translatable="false">ExplainMe</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="serverconnectionerrordialog_message">Wystąpił problem z serwerem.</string>
-    <string name="serverconnectionerrordialog_tryagain">Spróbuj ponownie.</string>
-    <string name="serverconnectionerrordialog_cancel">OK</string>
+    <string name="serverconnectionerrordialog_message">Server problem occurred</string>
+    <string name="serverconnectionerrordialog_tryagain">Try again!</string>
+    <string name="serverconnectionerrordialog_cancel" translatable="false">OK</string>
+    <string name="explain_searchwordhint">Type word to explain</string>
+    <string name="explain_tablayout_tab1">DEFINITION</string>
+    <string name="explain_tablayout_tab2">SYNONYM</string>
+    <string name="main_historybutton">MY HISTORY</string>
+    <string name="main_favouritesbutton">MY FAVOURITES</string>
+    <string name="main_hellotext">Hello There!</string>
+    <string name="main_explainmebutton">EXPLAIN ME, PLEASE!</string>
 </resources>

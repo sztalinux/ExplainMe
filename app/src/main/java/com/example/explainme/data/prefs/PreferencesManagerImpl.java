@@ -3,32 +3,50 @@ package com.example.explainme.data.prefs;
 import android.content.Context;
 import android.content.SharedPreferences;
 
-import com.example.explainme.data.network.model.SynonymDto;
 import com.example.explainme.utils.Const;
 import com.google.gson.Gson;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.Set;
+
 import static android.content.Context.MODE_PRIVATE;
+import static com.example.explainme.utils.Const.PREFERENCES_KEY_HISTORY;
 
 public class PreferencesManagerImpl implements PreferencesManager {
 
-    private final SharedPreferences apiResponseSharedPreferences;
-    private final SharedPreferences searchHistorySharedPreferences;
+    private final SharedPreferences sharedPreferences;
     private Gson gson;
 
     public PreferencesManagerImpl(Context c) {
-        apiResponseSharedPreferences = c.getSharedPreferences(Const.PREFERENCES_FILE_NAME_API_RESPONSES, MODE_PRIVATE);
-        searchHistorySharedPreferences = c.getSharedPreferences(Const.PREFERENCES_FILE_NAME_SEARCH_HISTORY, MODE_PRIVATE);
+        sharedPreferences = c.getSharedPreferences(Const.PREFERENCES_FILE_NAME, MODE_PRIVATE);
         gson = new Gson();
     }
 
+
     @Override
-    public void setSynonyms(SynonymDto synonym) {
-        apiResponseSharedPreferences.edit().putString(Const.PREFERENCES_KEY_SYNONYMS, gson.toJson(synonym)).apply();
+    public void addWordToHistory(String word) {
+        Set<String> words = new LinkedHashSet<>();
+        Set<String> currentWords = new LinkedHashSet<>(sharedPreferences.getStringSet(PREFERENCES_KEY_HISTORY, new LinkedHashSet<>()));
+        words.add(word);
+        words.addAll(currentWords);
+        sharedPreferences.edit().putStringSet(PREFERENCES_KEY_HISTORY, words).apply();
     }
 
     @Override
-    public SynonymDto getSynonyms() {
-        String synonymsJson = apiResponseSharedPreferences.getString(Const.PREFERENCES_KEY_SYNONYMS, "");
-        return gson.fromJson(synonymsJson, SynonymDto.class);
+    public List<String> getHistoryWords() {
+        return new ArrayList<>(sharedPreferences.getStringSet(PREFERENCES_KEY_HISTORY, new LinkedHashSet<>()));
     }
+
+    @Override
+    public void removeWordFromHistory(String word) {
+        Set<String> words = new LinkedHashSet<>();
+        Set<String> currentWords = new LinkedHashSet<>(sharedPreferences.getStringSet(PREFERENCES_KEY_HISTORY, new LinkedHashSet<>()));
+        words.addAll(currentWords);
+        words.remove(word);
+    }
+
+
 }

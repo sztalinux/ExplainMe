@@ -21,6 +21,8 @@ import com.example.explainme.contractMVP.ExplainContract;
 import com.example.explainme.data.database.AppDatabase;
 import com.example.explainme.data.network.model.DefinitionDto;
 import com.example.explainme.data.network.model.SynonymDto;
+import com.example.explainme.data.prefs.PreferencesManager;
+import com.example.explainme.data.prefs.PreferencesManagerImpl;
 import com.example.explainme.presenter.ExplainPresenter;
 import com.google.android.material.tabs.TabLayout;
 
@@ -40,13 +42,14 @@ import static com.example.explainme.utils.Const.SYNONYM_INTENT;
 public class ExplainActivity extends AppCompatActivity implements ExplainContract.View, ServerConnectionErrorDialogFragment.ServerConnectionErrorDialogListener {
 
     @Getter
-    private DefinitionDto definition;
+    private DefinitionDto definition = new DefinitionDto("", new ArrayList<>());
     @Getter
-    private SynonymDto synonym;
+    private SynonymDto synonym = new SynonymDto("", new ArrayList<>());
 
 
     ExplainPresenter presenter;
     ExplainTabsAdapter tabsAdapter;
+    private PreferencesManager preferencesManager;
 
     @BindView(R.id.editText_wordtoexplain)
     EditText wordEditText;
@@ -68,6 +71,7 @@ public class ExplainActivity extends AppCompatActivity implements ExplainContrac
         presenter.getDefinition(word);
         presenter.getSynonym(word);
         wordEditText.getText().clear();
+        preferencesManager.addWordToHistory(word);
     }
 
     @OnClick(R.id.imageButton_addToFavourites)
@@ -83,8 +87,7 @@ public class ExplainActivity extends AppCompatActivity implements ExplainContrac
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_explain);
         ButterKnife.bind(this);
-        definition = new DefinitionDto("", new ArrayList<>());
-        synonym = new SynonymDto("", new ArrayList<>());
+        preferencesManager = new PreferencesManagerImpl(this);
         presenter = new ExplainPresenter();
         presenter.attach(this);
         hideProgressBar();
@@ -161,7 +164,7 @@ public class ExplainActivity extends AppCompatActivity implements ExplainContrac
     public void setDefinition(DefinitionDto definition) {
         this.definition.setWord(definition.getWord());
         this.definition.getDefinitions().clear();
-        this.definition.setDefinitions(definition.getDefinitions());
+        this.definition.getDefinitions().addAll(definition.getDefinitions());
     }
 
     @Override

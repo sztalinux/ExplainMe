@@ -33,7 +33,7 @@ public class DefinitionFragment extends Fragment {
     private final String TAG = "DefinitionFragment";
 
     private RecyclerView.Adapter adapter;
-    private List<Definition> definitions;
+    private List<Definition> definitions = new ArrayList<>();
     @BindView(R.id.recyclerview_definition)
     RecyclerView recyclerView;
 
@@ -67,7 +67,7 @@ public class DefinitionFragment extends Fragment {
 
     private void setDefinitions() {
         definitions.clear();
-        definitions = ((ExplainActivity) getActivity()).getDefinition().getDefinitions();
+        definitions.addAll(((ExplainActivity) getActivity()).getDefinition().getDefinitions());
     }
 
     private void initializeDefinitions(){

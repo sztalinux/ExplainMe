@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name" translatable="false" >ExplainMe</string>
+    <string name="explain_searchwordhint">Podaj słowo do wyjaśnienia</string>
+    <string name="explain_tablayout_tab1">DEFINICJA</string>
+    <string name="explain_tablayout_tab2">SYNONIM</string>
+    <string name="main_explainmebutton">WYJAŚNIJ MI, PROSZĘ!</string>
+    <string name="main_favouritesbutton">ULUBIONE</string>
+    <string name="main_hellotext">Cześć!</string>
+    <string name="main_historybutton">HISTORIA</string>
+    <string name="serverconnectionerrordialog_cancel" translatable="false">OK</string>
+    <string name="serverconnectionerrordialog_message">Wystąpił problem z serwerem</string>
+    <string name="serverconnectionerrordialog_tryagain">Spróbuj ponownie!</string>
+</resources>

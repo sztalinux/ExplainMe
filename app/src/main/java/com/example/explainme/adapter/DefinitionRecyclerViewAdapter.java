@@ -48,7 +48,7 @@ public class DefinitionRecyclerViewAdapter extends RecyclerView.Adapter<Definiti
 
     @Override
     public void onBindViewHolder(@NonNull DefinitionViewHolder holder, int position) {
-        holder.definitionNumberTextView.setText(position + 1);
+        holder.definitionNumberTextView.setText(String.valueOf(position + 1));
         holder.definitionPartOfSpeechTextView.setText(definitions.get(position).getPartOfSpeech());
         holder.definitionContentTextView.setText(definitions.get(position).getDefinitionContent());
     }
