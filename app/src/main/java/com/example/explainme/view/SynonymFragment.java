@@ -16,7 +16,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.explainme.R;
-import com.example.explainme.adapter.DefinitionRecyclerViewAdapter;
 import com.example.explainme.adapter.SynonymRecyclerViewAdapter;
 
 import org.androidannotations.annotations.EFragment;
@@ -55,14 +54,14 @@ public class SynonymFragment extends Fragment {
     private BroadcastReceiver synonymReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-            setDefinitions();
+            setSynonyms();
             adapter.notifyDataSetChanged();
         }
     };
 
-    private void setDefinitions() {
+    private void setSynonyms() {
         synonyms.clear();
-        synonyms = ((ExplainActivity) getActivity()).getSynonym().getSynonyms();
+        synonyms.addAll(((ExplainActivity) getActivity()).getSynonym().getSynonyms());
     }
 
     private void initializeDefinitions(){

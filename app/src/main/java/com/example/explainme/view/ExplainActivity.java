@@ -2,6 +2,7 @@ package com.example.explainme.view;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ProgressBar;
@@ -42,14 +43,14 @@ import static com.example.explainme.utils.Const.SYNONYM_INTENT;
 public class ExplainActivity extends AppCompatActivity implements ExplainContract.View, ServerConnectionErrorDialogFragment.ServerConnectionErrorDialogListener {
 
     @Getter
-    private DefinitionDto definition = new DefinitionDto("", new ArrayList<>());
+    private DefinitionDto definition;
     @Getter
-    private SynonymDto synonym = new SynonymDto("", new ArrayList<>());
-
+    private SynonymDto synonym;
 
     ExplainPresenter presenter;
     ExplainTabsAdapter tabsAdapter;
     private PreferencesManager preferencesManager;
+    private String wordToSearch;
 
     @BindView(R.id.editText_wordtoexplain)
     EditText wordEditText;
@@ -66,12 +67,10 @@ public class ExplainActivity extends AppCompatActivity implements ExplainContrac
 
     @OnClick(R.id.imageButton_searchword)
     void searchWord(){
-        String word = Objects.requireNonNull(wordEditText.getText().toString());
-        showProgressBar();
-        presenter.getDefinition(word);
-        presenter.getSynonym(word);
+        wordToSearch = Objects.requireNonNull(wordEditText.getText().toString());
+        preferencesManager.addWordToHistory(wordToSearch);
         wordEditText.getText().clear();
-        preferencesManager.addWordToHistory(word);
+        getWord();
     }
 
     @OnClick(R.id.imageButton_addToFavourites)
@@ -90,10 +89,19 @@ public class ExplainActivity extends AppCompatActivity implements ExplainContrac
         preferencesManager = new PreferencesManagerImpl(this);
         presenter = new ExplainPresenter();
         presenter.attach(this);
+        definition = new DefinitionDto("", new ArrayList<>());
+        synonym = new SynonymDto("", new ArrayList<>());
+
         hideProgressBar();
         setupAdapter();
         viewPager.setAdapter(tabsAdapter);
         tabLayout.setupWithViewPager(viewPager);
+        if (savedInstanceState != null){
+            if(!TextUtils.isEmpty(savedInstanceState.getString("word"))){
+                wordToSearch = savedInstanceState.getString("word");
+                getWord();
+            }
+        }
     }
 
 
@@ -102,6 +110,11 @@ public class ExplainActivity extends AppCompatActivity implements ExplainContrac
         super.onStart();
         presenter.setTransactionSafe(true);
         presenter.runPendingTransactions();
+    }
+
+    protected void onSaveInstanceState(Bundle icicle) {
+        super.onSaveInstanceState(icicle);
+        icicle.putString("word", wordToSearch);
     }
 
     public void onPostResume() {
@@ -131,8 +144,6 @@ public class ExplainActivity extends AppCompatActivity implements ExplainContrac
         Intent definitionIntent = new Intent(DEFINITION_INTENT);
         LocalBroadcastManager.getInstance(this).sendBroadcast(definitionIntent);
         searchedWordTextView.setText(definition.getWord());
-        Intent synonymIntent = new Intent(SYNONYM_INTENT);
-        LocalBroadcastManager.getInstance(this).sendBroadcast(synonymIntent);
         resultLayout.setVisibility(View.VISIBLE);
     }
 
@@ -141,13 +152,6 @@ public class ExplainActivity extends AppCompatActivity implements ExplainContrac
         Intent synonymIntent = new Intent(SYNONYM_INTENT);
         LocalBroadcastManager.getInstance(this).sendBroadcast(synonymIntent);
         resultLayout.setVisibility(View.VISIBLE);
-    }
-
-
-    void setupAdapter(){
-        tabsAdapter = new ExplainTabsAdapter(getSupportFragmentManager());
-        tabsAdapter.addFragment(new DefinitionFragment(), "Definition");
-        tabsAdapter.addFragment(new SynonymFragment(), "Synonym");
     }
 
     @Override
@@ -171,7 +175,7 @@ public class ExplainActivity extends AppCompatActivity implements ExplainContrac
     public void setSynonym(SynonymDto synonym) {
         this.synonym.setWord(synonym.getWord());
         this.synonym.getSynonyms().clear();
-        this.synonym.setSynonyms(synonym.getSynonyms());
+        this.synonym.getSynonyms().addAll(synonym.getSynonyms());
     }
 
     @Override
@@ -189,5 +193,17 @@ public class ExplainActivity extends AppCompatActivity implements ExplainContrac
     @Override
     public void onServerConnectionErrorDialogNegativeClick(DialogFragment dialog) {
 
+    }
+
+    void setupAdapter(){
+        tabsAdapter = new ExplainTabsAdapter(getSupportFragmentManager());
+        tabsAdapter.addFragment(new DefinitionFragment(), "Definition");
+        tabsAdapter.addFragment(new SynonymFragment(), "Synonym");
+    }
+
+    public void getWord(){
+        showProgressBar();
+        presenter.getDefinition(wordToSearch);
+        presenter.getSynonym(wordToSearch);
     }
 }

@@ -38,7 +38,7 @@ public class ExplainPresenter extends BasePresenter<ExplainContract.View> implem
                 if(response.body() == null) {
                     Log.e(TAG, "onResponse: nullObject");
                     view.hideProgressBar();
-                    view.showToast("No such favouriteWord", Toast.LENGTH_LONG);
+                    view.showToast("No such word", Toast.LENGTH_LONG);
                 } else {
                     Log.e(TAG, "onResponse: " + response.body().getWord() + "\t" + response.body().getDefinitions().get(0));
                     view.setDefinition(response.body());
@@ -68,7 +68,7 @@ public class ExplainPresenter extends BasePresenter<ExplainContract.View> implem
                     Log.e(TAG, "onResponse: " + response.body().getWord() + "\t" + response.body().getSynonyms().get(0));
                     view.setSynonym(response.body());
                     view.hideProgressBar();
-                    view.updateDefinitionView();
+                    view.updateSynonymView();
                 }
             }
 

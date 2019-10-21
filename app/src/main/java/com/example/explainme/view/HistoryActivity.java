@@ -61,7 +61,6 @@ public class HistoryActivity extends AppCompatActivity {
     private void updateView() {
         historyWords.clear();
         historyWords.addAll(preferencesManager.getHistoryWords());
-        Log.e(TAG, historyWords.get(0));
         adapter.notifyDataSetChanged();
     }
 }

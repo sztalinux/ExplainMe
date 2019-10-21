@@ -14,6 +14,7 @@ public interface ExplainContract {
         void showProgressBar();
         void hideProgressBar();
         void showToast(CharSequence message, int duration);
+        void getWord();
     }
 
     interface Presenter {

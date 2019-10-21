@@ -45,7 +45,7 @@ public class SynonymRecyclerViewAdapter extends RecyclerView.Adapter<SynonymRecy
 
     @Override
     public void onBindViewHolder(@NonNull SynonymRecyclerViewAdapter.SynonymViewHolder holder, int position) {
-        holder.synonymNumberTextView.setText(position + 1);
+        holder.synonymNumberTextView.setText(String.valueOf(position + 1));
         holder.synonymContentTextView.setText(synonyms.get(position));
     }
 
